@@ -1,17 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+/* 
+    入口js
+*/
+
+/* 第三方 */
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux'
+
+/* 自定义 */
+//路由组件
+import Main from './containers/main/main'
+import Register from './containers/register/register'
+import Login from './containers/login/login'
+// 状态管理
+import store from './redux/store'
+
+import './assets/css/index.css'
+
+// import './test/socketio_test'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    (
+        <Provider store={store}>
+            <HashRouter>
+                <Switch>
+                    <Route path="/register" component={Register}></Route>
+                    <Route path="/login" component={Login}></Route>
+                    <Route component={Main}></Route>
+                </Switch>
+            </HashRouter>
+        </Provider>
+    ), document.getElementById('root'))
